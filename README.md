@@ -2,6 +2,68 @@
 
 Import blog entries from a HubSpot COS export into TYPO3 news items.
 
+## Usage
+
+### Analyze / prepare import
+```
+$> php bin/typo3 hubspot_import:blog:analyze --help
+
+Analyze what will be processed
+
+COMMAND:
+  hubspot_import:blog:analyze
+
+USAGE:
+  /opt/phpfarm/inst/bin/php-7.0 bin/typo3 blog:analyze [<options>] <config>
+
+ARGUMENTS:
+  --config             Name of the configuration to use
+
+OPTIONS:
+  --export-path        The path to the directory of the blog sites (HubSport
+                       COS export)
+```
+
+### Import
+```
+$> php bin/typo3 hubspot_import:blog:import --help
+   
+   Import a blog into news
+   
+   COMMAND:
+     hubspot_import:blog:import
+   
+   USAGE:
+     /opt/phpfarm/inst/bin/php-7.0 bin/typo3 blog:import [<options>] <config>
+   
+   ARGUMENTS:
+     --config             Name of the configuration to use
+   
+   OPTIONS:
+     --export-path        The path to the directory of the blog sites (HubSport
+                          COS export)
+```
+
+### Import comments
+```
+$> php bin/typo3 hubspot_import:blog:comments --help
+   
+   Update comments
+   
+   COMMAND:
+     hubspot_import:blog:comments
+   
+   USAGE:
+     /opt/phpfarm/inst/bin/php-7.0 bin/typo3 blog:comments [<options>] <config>
+   
+   ARGUMENTS:
+     --config             Name of the configuration to use
+   
+   OPTIONS:
+     --dry-run            Whether to only show records to be imported
+```
+
+
 ## Configuration
 
 Place a file named HubSpotImport.php in typo3conf and add some configuration to it:
