@@ -19,7 +19,8 @@ use Helhum\Typo3Console\Log\Writer\ConsoleWriter;
 use NIMIUS\NewsBlog\Domain\Model\Author;
 use NIMIUS\NewsBlog\Domain\Repository\AuthorRepository;
 use TYPO3\CMS\Core\Log\LogLevel;
-use GeorgRinger\News\Domain\Model\FileReference;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -116,10 +117,16 @@ class NewsImportService extends \GeorgRinger\News\Domain\Service\NewsImportServi
                     $author->setAbstract($authorData['abstract']);
                     $author->setRealName($authorData['name']);
                     if ($authorData['avatar']) {
-                        /** @var FileReference $avatar */
-                        $avatar = $this->objectManager->get(FileReference::class);
-                        $avatar->setFileUid($authorData['avatar']);
-                        $author->setAvatar($avatar);
+                        $avatar = $author->getAvatar();
+                        if (!$avatar) {
+                            /** @var FileReference $avatar */
+                            $avatar = $this->objectManager->get(FileReference::class);
+                            $author->setAvatar($avatar);
+                        }
+                        $reference = ResourceFactory::getInstance()->createFileReferenceObject([
+                            'uid_local' => $authorData['avatar']
+                        ]);
+                        $avatar->setOriginalResource($reference);
                     }
                 }
             }

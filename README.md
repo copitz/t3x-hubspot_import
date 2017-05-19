@@ -2,7 +2,24 @@
 
 Import blog entries from a HubSpot COS export into TYPO3 news items.
 
+Imports:
+ - Author (along with Avatar, Abstract and Username into be_users when [news_blog](https://github.com/nimius/news-blog) is installed)
+ - Preview image (taken from og:image meta)
+ - Bodytext
+    - local images are replaced by magic images
+    - local file links are replaced with t3://file links
+    - classes can be remapped
+    - custom processing possible (e.g. for datetime)
+ - Title
+ - Teaser
+ - Tags
+
 ## Usage
+
+1. Download file export from hubspot and place it into a storage
+2. Run hubspot_import:blog:analyze and check items
+3. Run hubspot_import:blog:import
+4. Run hubspot_import:blog:comments
 
 ### Analyze / prepare import
 ```
