@@ -1,0 +1,19 @@
+{
+    "name": "netresearch/hubspot-import",
+    "type": "typo3-cms-extension",
+    "description": "HubSpot Import to TYPO3",
+    "homepage": "http://www.netresearch.de/",
+    "support": {
+        "issues": "https://jira.netresearch.de/browse/NRNR-392"
+    },
+    "require": {
+        "georgringer/news": "^6.0",
+        "symfony/dom-crawler": "~3.2",
+        "symfony/css-selector": "~3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Netresearch\\HubspotImport\\": "Classes"
+        }
+    }
+}
