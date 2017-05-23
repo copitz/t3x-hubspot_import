@@ -387,7 +387,10 @@ class BlogCommandController extends CommandController {
         $this->replaceImages();
         $this->replaceClasses();
 
-        $current->entry['bodytext'] = $this->current->postBody->html();
+        $bodytext = str_replace(["\n", "\r"], '', $this->current->postBody->html());
+
+        $current->entry['teaser'] = strpos($bodytext, '<!--more-->') ? trim(strip_tags(explode('<!--more-->', $bodytext, 2)[0])) : '';
+        $current->entry['bodytext'] = preg_replace('/(<([a-z]+[0-9]?)>\s*)?<!--more-->(\s*<\/\2>)?/', '', $bodytext);
         $current->entry['media'] = $this->getMedia();
         $current->entry['author_data'] = $this->getAuthor();
         $current->entry['tags'] = $this->getTags();
